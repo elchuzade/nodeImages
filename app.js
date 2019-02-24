@@ -58,6 +58,15 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/images/:image_id', (req, res) => {
+  ImageData.findById(req.params.image_id, (err, foundImage) => {
+    if (err) { console.log(err) } else {
+      console.log('---',foundImage);
+      res.render('image', { image: foundImage });
+    }
+  });
+});
+
 // delete route
 app.post('/images/:image_id/delete', (req, res) => {
   fs.unlinkSync('./public/uploads/myImage-1550999070268.pdf');
