@@ -10,9 +10,20 @@
 </head>
 <body>
   show all images
-  <% images.forEach(function(image) { %>
-    <img src='/uploads/<%=image.fileName%>'>
-  <% }) %>
+  <div class="row">
+    <% images.forEach(function(image) { %>
+      <div class="col s12 m7"  style='max-width: 200px;'>
+        <div class="card">
+          <div class="card-image">
+            <img src='/uploads/<%=image.fileName%>'>
+          </div>
+          <div class="card-action">
+            <a href='/images/<%=image._id%>'>check image</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
   <script
   src='https://code.jquery.com/jquery-3.3.1.min.js'
   integrity='sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8='
