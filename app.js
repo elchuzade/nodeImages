@@ -35,7 +35,7 @@ function checkFileType(file, cb) {
   if (mimeType && extName) {
     return cb(null, true);
   } else {
-    cb('Error: Images or PDF only');
+    cb('Error: Images only (jpeg, jpg, png)');
   }
 }
 
@@ -49,7 +49,7 @@ let upload = multer({
   }
 }).single('myImage');
 
-// show form route
+// landing page route with all images
 app.get('/', (req, res) => {
   ImageData.find({}, (err, foundImages) => {
     if (err) { console.log(err) } else {
@@ -58,10 +58,10 @@ app.get('/', (req, res) => {
   });
 });
 
+// single image route
 app.get('/images/:image_id', (req, res) => {
   ImageData.findById(req.params.image_id, (err, foundImage) => {
     if (err) { console.log(err) } else {
-      console.log('---',foundImage);
       res.render('image', { image: foundImage });
     }
   });
