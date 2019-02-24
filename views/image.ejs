@@ -4,16 +4,24 @@
   <meta charset='utf-8'>
   <meta name='viewport'  content='width=device-width,initial-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  <title>Upload Image</title>
+  <title>Single Image</title>
   <!-- Compiled and minified CSS -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
 </head>
 <body>
   <div class='container'>
+    <h2>Single Image</h2>
     <div class='row'>
-      <form action='/images/<%=image._id%>/delete' method='POST'>
-        <button class="waves-effect waves-light btn" type='submit'>delete</button>
-      </form>
+      <div class='col'>
+        <a class="waves-effect waves-light btn" href='/'>back to gallery</a>
+      </div>
+      <div class='col'>
+        <form action='/images/<%=image._id%>/delete' method='POST'>
+          <button class="waves-effect waves-light btn" type='submit'>delete</button>
+        </form>
+      </div>
+    </div>
+    <div class='row'>
       <div class='col'>
         <img src='/uploads/<%=image.fileName%>' style='max-width: 800px;'>
       </div>

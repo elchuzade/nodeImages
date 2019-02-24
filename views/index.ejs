@@ -4,25 +4,32 @@
   <meta charset='utf-8'>
   <meta name='viewport'  content='width=device-width,initial-scale=1.0'>
   <meta http-equiv='X-UA-Compatible' content='ie=edge'>
-  <title>Upload Image</title>
+  <title>All Images</title>
   <!-- Compiled and minified CSS -->
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'>
 </head>
 <body>
-  show all images
-  <div class="row">
-    <% images.forEach(function(image) { %>
-      <div class="col s12 m7" style='max-width: 200px;'>
-        <div class="card">
-          <div class="card-image">
-            <img src='/uploads/<%=image.fileName%>'>
-          </div>
-          <div class="card-action">
-            <a href='/images/<%=image._id%>'>check image</a>
+  <div class='container'>
+    <h2>All Images</h2>
+    <div class='row'>
+      <div class='col'>
+        <a class="waves-effect waves-light btn" href='/upload'>upload</a>
+      </div>
+    </div>
+    <div class="row">
+      <% images.forEach(function(image) { %>
+        <div class="col s12 m7" style='max-width: 200px;'>
+          <div class="card">
+            <div class="card-image">
+              <img src='/uploads/<%=image.fileName%>'>
+            </div>
+            <div class="card-action">
+              <a href='/images/<%=image._id%>'>check image</a>
+            </div>
           </div>
         </div>
-      </div>
-    <% }) %>
+      <% }) %>
+    </div>
   </div>
   <script
   src='https://code.jquery.com/jquery-3.3.1.min.js'

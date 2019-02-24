@@ -27,7 +27,7 @@ let storageVar = multer.diskStorage({
 // middleware function
 function checkFileType(file, cb) {
   // allowed extensions
-  let fileTypes = /jpeg|jpg|pdf|png|gif/;
+  let fileTypes = /jpeg|jpg|png/;
   // check the extension
   let extName = fileTypes.test(path.extname(file.originalname).toLowerCase());
   // check mimetype
