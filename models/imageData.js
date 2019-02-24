@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var EventSchema = new mongoose.Schema({
+var ImageSchema = new mongoose.Schema({
   fieldName: String,
   originalName: String,
   encoding: String,
@@ -11,4 +11,4 @@ var EventSchema = new mongoose.Schema({
   size: Number
 }, { timestamps: true });
 
-module.exports = mongoose.model('Event', EventSchema);
+module.exports = mongoose.model('imageData', ImageSchema);

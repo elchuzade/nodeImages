@@ -9,7 +9,7 @@ let ImageData       = require('./models/imageData');
 
 // init app
 let app = express();
-mongoose.connect('mongodb://localhost/imageUpload');
+mongoose.connect('mongodb://localhost/imgimg');
 app.use(bodyParser.urlencoded({extended:true}));
 app.set('view engine', 'ejs');
 app.use(express.static('./public'));
@@ -59,9 +59,13 @@ app.get('/', (req, res) => {
 });
 
 // delete route
-app.get('/delete', (req, res) => {
+app.post('/images/:image_id/delete', (req, res) => {
   fs.unlinkSync('./public/uploads/myImage-1550999070268.pdf');
-  res.send('deleted');
+  res.redirect('/');
+});
+
+app.get('/upload', (req, res) => {
+  res.render('upload');
 });
 
 // edit route
@@ -73,12 +77,23 @@ app.post('/upload', (req, res) => {
     } else {
       // info from req.file should be added to the mongoDB
       console.log(req.file);
+      let newImage = {
+        fieldName:      req.file.fieldname,
+        originalName:   req.file.originalname,
+        encoding:       req.file.encoding,
+        mimeType:       req.file.mimetype,
+        destination:    req.file.destination,
+        fileName:       req.file.filename,
+        path:           req.file.path,
+        size:           req.file.size
+      };
       if (req.file == undefined) {
         res.render('upload', { msg: 'Error: no file selected' });
       } else {
-        res.render('index', {
-          msg: 'File Uploaded!',
-          file: `uploads/${req.file.filename}`
+        ImageData.create(newImage, (err, createdImage) => {
+          if(err) { console.log(err) } else {
+            res.redirect('/');
+          }
         });
       }
     }
