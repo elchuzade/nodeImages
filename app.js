@@ -85,28 +85,28 @@ app.get('/upload', (req, res) => {
   res.render('upload');
 });
 
-// edit route
+// upload post route
 app.post('/upload', (req, res) => {
   upload(req, res, (err) => {
     if (err) {
       console.log(err);
       res.render('upload', { msg: err });
     } else {
-      // info from req.file should be added to the mongoDB
-      console.log(req.file);
-      let newImage = {
-        fieldName:      req.file.fieldname,
-        originalName:   req.file.originalname,
-        encoding:       req.file.encoding,
-        mimeType:       req.file.mimetype,
-        destination:    req.file.destination,
-        fileName:       req.file.filename,
-        path:           req.file.path,
-        size:           req.file.size
-      };
       if (req.file == undefined) {
         res.render('upload', { msg: 'Error: no file selected' });
       } else {
+        // info from req.file should be added to the mongoDB
+        console.log(req.file);
+        let newImage = {
+          fieldName:      req.file.fieldname,
+          originalName:   req.file.originalname,
+          encoding:       req.file.encoding,
+          mimeType:       req.file.mimetype,
+          destination:    req.file.destination,
+          fileName:       req.file.filename,
+          path:           req.file.path,
+          size:           req.file.size
+        };
         ImageData.create(newImage, (err, createdImage) => {
           if(err) { console.log(err) } else {
             res.redirect('/');
